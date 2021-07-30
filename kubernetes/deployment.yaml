@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: pawel-flask-app
+  labels:
+    app: flask
+spec:
+  selector:
+    matchLabels:
+      app: flask
+  template:
+    metadata:
+      labels:
+        app: flask
+    spec:
+      containers:
+        - name: pawel-flask-app
+          image: "eu.gcr.io/pawel-matuszny-2/pawel-flask-app:ver1.0"
+          resources:
+            requests:
+              memory: 64Mi
+              cpu: 64m
+            limits:
+              memory: 128Mi
+              cpu: 128m
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: pawel-db-config
+          readinessProbe:
+            httpGet:
+             path: /http-health
+             port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 5
+          livenessProbe:
+            httpGet:
+              path: /http-health
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 5
+      imagePullSecrets:
+        - name: gcr-json-key

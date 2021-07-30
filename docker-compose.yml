@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+  app:
+    build: 
+      context: .
+      args:
+        UID: 500
+    ports:
+      - "80:80"
+    volumes:
+      - .:/app
+    image: eu.gcr.io/pawel-matuszny-2/pawel-flask-app:ver1.0

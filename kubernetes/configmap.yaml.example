@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata: 
+  name: pawel-db-config
+  labels:
+    app: flask
+data:
+  DB_NAME: "app_db"
+  DB_USER: "postgres"
+  DB_PASS: ""
+  DB_HOST: "34.116.171.133"
+  DB_PORT: "5432"
+  APP_UID: "500"
+  SECRET_KEY: ""
+  TOKEN_EXPIRATION_TIME_IN_MINUTES: "30"

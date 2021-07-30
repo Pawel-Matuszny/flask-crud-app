@@ -1,0 +1,10 @@
+flask-sqlalchemy
+flask-migrate
+flask-script
+psycopg2
+uwsgi
+pyjwt==1.7.1
+Werkzeug
+datetime
+uuid
+sentry-sdk[flask]

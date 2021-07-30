@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+    env_file: .env
+    volumes:
+      - db-data:/var/lib/postgresql/data/ 
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+  app:
+    build: 
+      args:
+        UID: "${APP_UID}"
+    env_file: .env
+    depends_on:
+      - db
+volumes:
+  db-data:
